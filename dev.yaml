@@ -1,5 +1,5 @@
 data:
-  script:
-  - ./dev_notify.sh
+  k8s:
+  - ./dev.yaml
 kind: DevConfig
 version: v1

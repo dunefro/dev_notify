@@ -13,15 +13,23 @@ data:
       - script 2
       - script 3
 '''
-config = {'version': 'v1', 'kind': 'DevConfig', 'data': ''}
+general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': ''}
 
 def _dev_config_sh(files):    
-    config['data'] = {'script': files}
-    return config 
+    # dev_config = general_config
+    general_config['data'] = {'script': files}
+    return  general_config 
+
+def _dev_config_k8s(files):
+    # dev_config = general_config
+    general_config['data'] = {'k8s': files}
+    return general_config
 
 def _dev_config_create(context,files):
     if context == 'shell_script':
         return _dev_config_sh(files)
+    elif context == "yaml_script":
+        return _dev_config_k8s(files)
 
 def dev_mode():
     directory = os.getcwd()
@@ -46,6 +54,10 @@ def init_mode():
 
     if shell_script:
         file_data = _dev_config_create('shell_script',shell_script)
+        print(file_data)
+    if yaml_script:
+        file_data = _dev_config_create('yaml_script',yaml_script)
+        print(file_data)
 
     with open('dev.yaml', 'w') as file:
         data = yaml.dump(file_data, file)
