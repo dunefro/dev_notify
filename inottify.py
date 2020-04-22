@@ -4,6 +4,24 @@ import os
 import yaml
 import glob
 
+'''
+version: v1
+kind: DevConfig
+data:
+    script:
+      - script 1
+      - script 2
+      - script 3
+'''
+config = {'version': 'v1', 'kind': 'DevConfig', 'data': ''}
+
+def _dev_config_sh(files):    
+    config['data'] = {'script': files}
+    return config 
+
+def _dev_config_create(context,files):
+    if context == 'shell_script':
+        return _dev_config_sh(files)
 
 def dev_mode():
     directory = os.getcwd()
@@ -22,8 +40,21 @@ def dev_mode():
 
 def init_mode():
     dir = os.getcwd()
-    print(glob.glob('./*.sh'))
-    # print(dir)
+    shell_script = glob.glob('./*.sh')
+    yaml_script = glob.glob('./*.yaml')
+    dockerfile_script = glob.glob('./Dockerfile')
+
+    if shell_script:
+        file_data = _dev_config_create('shell_script',shell_script)
+
+    with open('dev.yaml', 'w') as file:
+        data = yaml.dump(file_data, file)
 
 def hello():
     print("hello this is amazing to see a function being called from the command line in python")
+
+def main():
+    print('Main function')
+
+if __name__=='__main__':
+    main()
