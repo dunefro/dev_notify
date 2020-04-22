@@ -13,16 +13,18 @@ data:
       - script 2
       - script 3
 '''
-general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': ''}
+general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}}
 
 def _dev_config_sh(files):    
     # dev_config = general_config
-    general_config['data'] = {'script': files}
+    general_config['data']['script'] = files
     return  general_config 
 
 def _dev_config_k8s(files):
     # dev_config = general_config
-    general_config['data'] = {'k8s': files}
+    print('general config {}'.format(general_config))
+    general_config['data']['k8s'] = files
+    print('general config {}'.format(general_config))
     return general_config
 
 def _dev_config_create(context,files):
