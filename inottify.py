@@ -50,9 +50,6 @@ def init_mode():
     with open('dev.yaml', 'w') as file:
         data = yaml.dump(file_data, file)
 
-def hello():
-    print("hello this is amazing to see a function being called from the command line in python")
-
 def main():
     print('Main function')
 
