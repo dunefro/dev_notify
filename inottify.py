@@ -2,8 +2,10 @@ from inotify_simple import INotify, flags
 import subprocess
 import os
 import yaml
+import glob
 
-def diff_func():
+
+def dev_mode():
     directory = os.getcwd()
     inotify = INotify()
     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
@@ -17,6 +19,11 @@ def diff_func():
             print('calling the script')
             os.chmod(file_name,0o755)
             subprocess.call(file_name,shell=True)    
-    
+
+def init_mode():
+    dir = os.getcwd()
+    print(glob.glob('./*.sh'))
+    # print(dir)
+
 def hello():
     print("hello this is amazing to see a function being called from the command line in python")
