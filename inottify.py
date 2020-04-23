@@ -53,7 +53,6 @@ def dev_mode():
     inotify = INotify()
     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
     wd = inotify.add_watch(directory, watch_flags)
-    # file_name = '/home/ubuntu/workspace/new/deploy.sh'
     print('before loop')
     _execute_config_file()
     while True:
@@ -66,11 +65,14 @@ def init_mode():
     shell_script = glob.glob('./*.sh')
     yaml_script = glob.glob('./*.yaml')
     dockerfile_script = glob.glob('./Dockerfile')
-
-    if shell_script.remove('./dev_notify.sh'):
+    file_data = general_config
+    shell_script.remove('./dev_notify.sh')
+    yaml_script.remove('./dev.yaml')
+    print(shell_script)
+    if shell_script:
         file_data = _dev_config_create('shell_script',shell_script)
         print(file_data)
-    if yaml_script.remove('./dev.yaml'):
+    if yaml_script:
         file_data = _dev_config_create('yaml_script',yaml_script)
         print(file_data)
 
