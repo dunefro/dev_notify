@@ -1,7 +1,6 @@
 data:
-  k8s:
-  - ./dev.yaml
   script:
   - ./dev_notify.sh
 kind: DevConfig
+stages: []
 version: v1
