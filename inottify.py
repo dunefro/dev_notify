@@ -17,7 +17,7 @@ general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}, 'stages': []
 
 def _dev_config_sh(files):    
 
-    general_config['data']['script'] = files
+    general_config['data']['scripts'] = files
     return general_config 
 
 def _dev_config_k8s(files):
@@ -44,13 +44,17 @@ def _read_config():
     return config_data
 
 def _execute_script(scripts):
+
+    print('Execute script')
     for script in scripts:
+        os.chmod(script,0o755)
         subprocess.call(script,shell=True)
     return None
 
 def _execute_stage(stage,config_file):
 
-    if stage == 'script':
+    print('execute stage')
+    if stage == 'scripts':
         scripts = config_file['data']['scripts']
         _execute_script(scripts)
 
@@ -71,6 +75,7 @@ def dev_mode():
     _execute_config_file()
     while True:
         event = inotify.read()
+        print(event)
         if event:
             _execute_config_file()   
 
