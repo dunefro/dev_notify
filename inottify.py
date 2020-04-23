@@ -43,9 +43,23 @@ def _read_config():
         config_data = yaml.load(f, Loader=yaml.FullLoader)
     return config_data
 
+def _execute_script(scripts):
+    for script in scripts:
+        subprocess.call(script,shell=True)
+    return None
+
+def _execute_stage(stage,config_file):
+
+    if stage == 'script':
+        scripts = config_file['data']['scripts']
+        _execute_script(scripts)
+
 def _execute_config_data(config_file):
 
-    print(config_file['data'])
+    stages = config_file['stages']
+    for stage in stages:
+        _execute_stage(stage,config_file)
+
     return None
 
 def dev_mode():
@@ -65,10 +79,11 @@ def init_mode():
     shell_script = glob.glob('./*.sh')
     yaml_script = glob.glob('./*.yaml')
     dockerfile_script = glob.glob('./Dockerfile')
+
     file_data = general_config
     shell_script.remove('./dev_notify.sh')
     yaml_script.remove('./dev.yaml')
-    print(shell_script)
+
     if shell_script:
         file_data = _dev_config_create('shell_script',shell_script)
         print(file_data)
