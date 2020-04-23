@@ -31,20 +31,32 @@ def _dev_config_create(context,files):
     elif context == "yaml_script":
         return _dev_config_k8s(files)
 
+def _read_config():
+    with open('dev.yaml','r') as f:
+        config_data = yaml.load(f, Loader=yaml.FullLoader)
+    return config_data
+
+def _execute_config(data):
+    print('================Data {}'.format(data))
+    return None
+
 def dev_mode():
     directory = os.getcwd()
     inotify = INotify()
     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
     wd = inotify.add_watch(directory, watch_flags)
-    file_name = '/home/ubuntu/workspace/new/deploy.sh'
+    # file_name = '/home/ubuntu/workspace/new/deploy.sh'
     print('before loop')
     while True:
         event = inotify.read()
         if event:
             print(event)
-            print('calling the script')
-            os.chmod(file_name,0o755)
-            subprocess.call(file_name,shell=True)    
+            # print('calling the script')
+            # Function to read the config file and then deploy
+            config_data = _read_config()
+            _execute_config(config_data)
+            # os.chmod(file_name,0o755)
+            # subprocess.call(file_name,shell=True)    
 
 def init_mode():
     dir = os.getcwd()
