@@ -1,6 +1,7 @@
 data:
-  script:
+  scripts:
   - ./test_script.sh
 kind: DevConfig
-stages: []
+stages:
+  - scripts
 version: v1
