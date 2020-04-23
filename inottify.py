@@ -13,7 +13,7 @@ data:
       - script 2
       - script 3
 '''
-general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}}
+general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}, 'stages': []}
 
 def _dev_config_sh(files):    
 
@@ -36,8 +36,9 @@ def _read_config():
         config_data = yaml.load(f, Loader=yaml.FullLoader)
     return config_data
 
-def _execute_config(data):
-    print('================Data {}'.format(data))
+def _execute_config(config_file):
+    # print('================Data {}'.format(data))
+    print(config_file['data'])
     return None
 
 def dev_mode():
@@ -67,7 +68,7 @@ def init_mode():
     if shell_script:
         file_data = _dev_config_create('shell_script',shell_script)
         print(file_data)
-    if yaml_script:
+    if yaml_script.remove('./dev.yaml'):
         file_data = _dev_config_create('yaml_script',yaml_script)
         print(file_data)
 
