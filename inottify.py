@@ -26,18 +26,25 @@ def _dev_config_k8s(files):
     return general_config
 
 def _dev_config_create(context,files):
+
     if context == 'shell_script':
         return _dev_config_sh(files)
     elif context == "yaml_script":
         return _dev_config_k8s(files)
 
+def _execute_config_file():
+
+    config_data = _read_config()
+    _execute_config_data(config_data)
+
 def _read_config():
+
     with open('dev.yaml','r') as f:
         config_data = yaml.load(f, Loader=yaml.FullLoader)
     return config_data
 
-def _execute_config(config_file):
-    # print('================Data {}'.format(data))
+def _execute_config_data(config_file):
+
     print(config_file['data'])
     return None
 
@@ -48,16 +55,11 @@ def dev_mode():
     wd = inotify.add_watch(directory, watch_flags)
     # file_name = '/home/ubuntu/workspace/new/deploy.sh'
     print('before loop')
+    _execute_config_file()
     while True:
         event = inotify.read()
         if event:
-            print(event)
-            # print('calling the script')
-            # Function to read the config file and then deploy
-            config_data = _read_config()
-            _execute_config(config_data)
-            # os.chmod(file_name,0o755)
-            # subprocess.call(file_name,shell=True)    
+            _execute_config_file()   
 
 def init_mode():
     dir = os.getcwd()
@@ -65,7 +67,7 @@ def init_mode():
     yaml_script = glob.glob('./*.yaml')
     dockerfile_script = glob.glob('./Dockerfile')
 
-    if shell_script:
+    if shell_script.remove('./dev_notify.sh'):
         file_data = _dev_config_create('shell_script',shell_script)
         print(file_data)
     if yaml_script.remove('./dev.yaml'):
