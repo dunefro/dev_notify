@@ -1,6 +1,6 @@
 data:
   script:
-  - ./dev_notify.sh
+  - ./test_script.sh
 kind: DevConfig
 stages: []
 version: v1
