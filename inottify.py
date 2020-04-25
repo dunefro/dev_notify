@@ -67,6 +67,7 @@ def _execute_config_data(config_file):
     return None
 
 def dev_mode():
+
     directory = os.getcwd()
     inotify = INotify()
     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
@@ -80,6 +81,7 @@ def dev_mode():
             _execute_config_file()   
 
 def init_mode():
+    
     dir = os.getcwd()
     shell_script = glob.glob('./*.sh')
     yaml_script = glob.glob('./*.yaml')
