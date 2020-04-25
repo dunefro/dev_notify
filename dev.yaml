@@ -1,7 +1,11 @@
-data:
-  scripts:
-  - ./test_script.sh
 kind: DevConfig
 stages:
   - scripts
+  - k8s
 version: v1
+data:
+  scripts:
+  - ./test_script.sh
+  k8s:
+    files: 
+      - pod.yaml
