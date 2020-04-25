@@ -51,12 +51,20 @@ def _execute_script(scripts):
         subprocess.call(script,shell=True)
     return None
 
+def _execute_yaml_script(yaml_scripts):
+
+    for file in yaml_scripts['files']:
+        
+
 def _execute_stage(stage,config_file):
 
     print('execute stage')
     if stage == 'scripts':
         scripts = config_file['data']['scripts']
         _execute_script(scripts)
+    elif stage == 'k8s':
+        yaml_scripts = config_file['data']['k8s']
+        _execute_yaml_script(yaml_scripts)
 
 def _execute_config_data(config_file):
 
@@ -81,7 +89,7 @@ def dev_mode():
             _execute_config_file()   
 
 def init_mode():
-    
+
     dir = os.getcwd()
     shell_script = glob.glob('./*.sh')
     yaml_script = glob.glob('./*.yaml')
@@ -100,6 +108,7 @@ def init_mode():
 
     with open('dev.yaml', 'w') as file:
         data = yaml.dump(file_data, file)
+
 
 def main():
     print('Main function')
