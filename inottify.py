@@ -3,6 +3,7 @@ import subprocess
 import os
 import yaml
 import glob
+import kubernetes
 
 '''
 version: v1
@@ -49,12 +50,15 @@ def _execute_script(scripts):
     for script in scripts:
         os.chmod(script,0o755)
         subprocess.call(script,shell=True)
-    return None
+
+def _execute_yaml(yaml_file):
+    # To execute yaml files
+    print(yaml_file)
 
 def _execute_yaml_script(yaml_scripts):
 
     for file in yaml_scripts['files']:
-        
+        _execute_yaml(file)
 
 def _execute_stage(stage,config_file):
 
