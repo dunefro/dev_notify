@@ -13,7 +13,10 @@ data:
       - script 1
       - script 2
       - script 3
+stages:
+  - script
 '''
+
 general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}, 'stages': []}
 
 def _dev_config_sh(files):    
