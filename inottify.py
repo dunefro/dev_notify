@@ -3,7 +3,8 @@ import subprocess
 import os
 import yaml
 import glob
-import kubernetes
+# import kubernetes
+from kubernetes import client, config, utils
 
 '''
 version: v1
@@ -15,6 +16,9 @@ data:
       - script 3
 '''
 general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}, 'stages': []}
+# Note: Import the config first and then the client.
+config.load_kube_config()
+k8s_client = client.ApiClient()
 
 def _dev_config_sh(files):    
 
@@ -51,9 +55,19 @@ def _execute_script(scripts):
         os.chmod(script,0o755)
         subprocess.call(script,shell=True)
 
+def _execute_yaml_context(data):
+    print(data['kind'])
+
 def _execute_yaml(yaml_file):
     # To execute yaml files
-    print(yaml_file)
+    # print(yaml_file)
+    # os.environ['KUBERNETES_SERVICE_HOST'] = 'kubernetes'
+
+    utils.create_from_yaml(k8s_client, yaml_file)
+    # with open(yaml_file,'r') as f:
+    #     yaml_context = list(yaml.load_all(f,Loader=yaml.FullLoader))
+    # for yaml_data in yaml_context:
+    #     _execute_yaml_context(yaml_data)
 
 def _execute_yaml_script(yaml_scripts):
 
@@ -105,10 +119,10 @@ def init_mode():
 
     if shell_script:
         file_data = _dev_config_create('shell_script',shell_script)
-        print(file_data)
+        # print(file_data)
     if yaml_script:
         file_data = _dev_config_create('yaml_script',yaml_script)
-        print(file_data)
+        # print(file_data)
 
     with open('dev.yaml', 'w') as file:
         data = yaml.dump(file_data, file)
