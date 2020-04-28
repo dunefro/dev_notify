@@ -62,15 +62,8 @@ def _execute_yaml_context(data):
     print(data['kind'])
 
 def _execute_yaml(yaml_file):
-    # To execute yaml files
-    # print(yaml_file)
-    # os.environ['KUBERNETES_SERVICE_HOST'] = 'kubernetes'
 
     utils.create_from_yaml(k8s_client, yaml_file)
-    # with open(yaml_file,'r') as f:
-    #     yaml_context = list(yaml.load_all(f,Loader=yaml.FullLoader))
-    # for yaml_data in yaml_context:
-    #     _execute_yaml_context(yaml_data)
 
 def _execute_yaml_script(yaml_scripts):
 
