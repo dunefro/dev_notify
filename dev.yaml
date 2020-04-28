@@ -1,11 +1,11 @@
 kind: DevConfig
 stages:
-  - scripts
+  # - scripts
   - k8s
 version: v1
 data:
-  scripts:
-  - ./test_script.sh
+  # scripts:
+  # - ./test_script.sh
   k8s:
     files: 
-      - pod.yaml
+      - nginx.yaml
