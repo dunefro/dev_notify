@@ -14,7 +14,10 @@ data:
       - script 1
       - script 2
       - script 3
+stages:
+  - script
 '''
+
 general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}, 'stages': []}
 # Note: Import the config first and then the client.
 config.load_kube_config()
