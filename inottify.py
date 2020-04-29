@@ -58,9 +58,6 @@ def _execute_script(scripts):
         os.chmod(script,0o755)
         subprocess.call(script,shell=True)
 
-def _execute_yaml_context(data):
-    print(data['kind'])
-
 def _execute_yaml(yaml_file):
 
     utils.create_from_yaml(k8s_client, yaml_file)
