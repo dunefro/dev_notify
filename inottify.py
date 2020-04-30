@@ -88,7 +88,7 @@ def _execute_config_data(config_file):
     return None
 
 def _check_devignore():
-    print(list(yaml.load_all('.devignore.yaml')))
+    print(list(yaml.load_all('.devignore.yaml',Loader=yaml.FullLoader)))
     
 
 def dev_mode():
@@ -99,8 +99,7 @@ def dev_mode():
     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
     inotify_object_list = []
     for (root,dirs,files) in os.walk(directory,topdown=True):
-        print(root)
-    wd = inotify.add_watch(directory, watch_flags)
+         inotify_object_list.append(inotify.add_watch(root, watch_flags))
     print('before loop')
     _execute_config_file()
     while True:
