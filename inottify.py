@@ -19,6 +19,8 @@ stages:
 '''
 
 general_config = {'version': 'v1', 'kind': 'DevConfig', 'data': {}, 'stages': []}
+
+devignore = {}
 # Note: Import the config first and then the client.
 config.load_kube_config()
 k8s_client = client.ApiClient()
@@ -85,11 +87,19 @@ def _execute_config_data(config_file):
 
     return None
 
+def _check_devignore():
+    print(list(yaml.load_all('.devignore.yaml')))
+    
+
 def dev_mode():
 
     directory = os.getcwd()
     inotify = INotify()
+    _check_devignore()
     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
+    inotify_object_list = []
+    for (root,dirs,files) in os.walk(directory,topdown=True):
+        print(root)
     wd = inotify.add_watch(directory, watch_flags)
     print('before loop')
     _execute_config_file()
