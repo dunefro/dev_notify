@@ -95,6 +95,7 @@ def dev_mode():
 
     directory = os.getcwd()
     inotify = INotify()
+    # Add the code to use rm_watch over the directories and the files that are to be removed from tracking
     _check_devignore()
     watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
     inotify_object_list = []
