@@ -1,5 +1,5 @@
 # dev_notify
-Development application tool
+Development application tool for deployment of your application
 
 Look at the dev.yaml file and realise how to mention the files that you want to re-deploy.
 
