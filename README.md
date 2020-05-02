@@ -6,6 +6,7 @@ Look at the dev.yaml file and realise how to mention the files that you want to 
 There are , as of now , two types of files that you can mention to work this tool out for you.
 These are kubernetes custom object file specified in yaml specification.
 
+
 For all the directories that you want to not include in your mention the names in the .devignore.yaml in the following format
 ```
 directories:
