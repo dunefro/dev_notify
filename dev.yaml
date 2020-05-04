@@ -9,3 +9,6 @@ data:
   # k8s:
     # files: 
       # - nginx.yaml
+  # helm:
+   #   - path: <folder directory>
+   #     name: <name>
