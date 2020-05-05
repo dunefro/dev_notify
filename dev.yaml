@@ -1,14 +1,14 @@
 kind: DevConfig
 stages:
-  - scripts
-  # - k8s
+  # - scripts
+  - k8s
 version: v1
 data:
-  scripts:
-  - ./test_script.sh
-  # k8s:
-    # files: 
-      # - nginx.yaml
+  # scripts:
+  # - ./test_script.sh
+  k8s:
+    files: 
+      - nginx.yaml
   # helm:
    #   - path: <folder directory>
    #     name: <name>
