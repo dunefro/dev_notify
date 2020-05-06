@@ -53,6 +53,9 @@ def _read_config():
         config_data = yaml.load(f, Loader=yaml.FullLoader)
     return config_data
 
+def _check_patch_object(kind):
+    #check patch here, return True
+    
 def _delete_kind_object(kind):
     # check for patch
     # otherwise delete the file
