@@ -62,7 +62,10 @@ def _execute_script(scripts):
 
 def _execute_yaml(yaml_file):
 
-    utils.create_from_yaml(k8s_client, yaml_file)
+    with open(yaml_file,'rt') as f:
+        output = list(yaml.load_all(f, Loader=yaml.FullLoader))
+    print(output)
+    # utils.create_from_yaml(k8s_client, yaml_file)
 
 def _execute_yaml_script(yaml_scripts):
 
