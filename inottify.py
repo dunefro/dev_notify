@@ -55,6 +55,9 @@ def _read_config():
 
 def _check_patch_object(kind):
     #check patch here, return True otherwise False
+
+def _recerate_object(kind):
+    # recreate the objects like pods, failure in patching
     
 def _delete_kind_object(kind):
     # check for patch
