@@ -54,7 +54,7 @@ def _read_config():
     return config_data
 
 def _check_patch_object(kind):
-    #check patch here, return True
+    #check patch here, return True otherwise False
     
 def _delete_kind_object(kind):
     # check for patch
