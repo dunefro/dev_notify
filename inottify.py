@@ -79,6 +79,8 @@ def _execute_yaml(yaml_file):
     with open(yaml_file,'rt') as f:
         output = list(yaml.load_all(f, Loader=yaml.FullLoader))
     for kind in output:
+        #check pod status here
+        # then go for delete 
         _delete_kind_object(kind)
     print(output)
     # utils.create_from_yaml(k8s_client, yaml_file)
