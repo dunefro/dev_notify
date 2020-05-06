@@ -54,7 +54,7 @@ def _read_config():
     return config_data
 
 def _check_object_exists(kind):
-    
+    # check whether the object exists or not
 
 def _check_patch_object(kind):
     #check patch here, return True otherwise False
