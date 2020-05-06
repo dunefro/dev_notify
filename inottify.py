@@ -53,6 +53,10 @@ def _read_config():
         config_data = yaml.load(f, Loader=yaml.FullLoader)
     return config_data
 
+def _delete_kind_object(kind):
+    # check for patch
+    # otherwise delete the file
+
 def _execute_script(scripts):
 
     print('Execute script')
@@ -64,6 +68,8 @@ def _execute_yaml(yaml_file):
 
     with open(yaml_file,'rt') as f:
         output = list(yaml.load_all(f, Loader=yaml.FullLoader))
+    for kind in output:
+        _delete_kind_object(kind)
     print(output)
     # utils.create_from_yaml(k8s_client, yaml_file)
 
