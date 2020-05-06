@@ -53,8 +53,12 @@ def _read_config():
         config_data = yaml.load(f, Loader=yaml.FullLoader)
     return config_data
 
+def _check_object_exists(kind):
+    
+
 def _check_patch_object(kind):
     #check patch here, return True otherwise False
+    # check for try and except, if patch is successful then write a true message otherwise return to called function 
 
 def _recerate_object(kind):
     # recreate the objects like pods, failure in patching
