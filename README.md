@@ -7,7 +7,7 @@ There are , as of now , two types of files that you can mention to work this too
 These are kubernetes custom object file specified in yaml specification.
 
 
-For all the directories that you want to not include in your mention the names in the .devignore.yaml in the following format
+For all the directories that you want to not include in the dev setup you can mention their names in the .devignore.yaml in the following format
 ```
 directories:
   - type: directory 
@@ -19,3 +19,4 @@ directories:
       - <list of file name that you still want to count for scanning relative to changes>
   - type: file
     path: <file name path that we wish to not include for scanning>
+```
