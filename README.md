@@ -1,5 +1,5 @@
 # dev_notify
-Development application tool for deployment of your application
+Application tool for deployment of your application in a fast manner. This will help in rolling changes instantly and only for development phase of any app.
 
 Look at the dev.yaml file and realise how to mention the files that you want to re-deploy.
 
